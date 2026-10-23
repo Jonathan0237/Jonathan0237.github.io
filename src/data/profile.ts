@@ -33,7 +33,7 @@ export const profile = {
     fr: 'Disponible immédiatement · CDI, CDD ou freelance',
     en: 'Available now · Permanent, fixed-term or freelance',
   } as L,
-  location: { fr: 'Île-de-France · mobile partout en France', en: 'Paris area · open to relocation in France' } as L,
+  location: { fr: 'Île-de-France · mobile partout en France · permis B', en: 'Paris area · open to relocation in France · driving licence (B)' } as L,
   email: 'simojonathan02@gmail.com',
   phone: '+33 6 16 50 88 14',
   phoneHref: 'tel:+33616508814',
