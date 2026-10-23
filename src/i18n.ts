@@ -127,8 +127,8 @@ export const ui = {
   },
   contact: {
     text: {
-      fr: "Je suis ouvert aux postes d'ingénieur en CDI ou en CDD, ainsi qu'aux missions en freelance, partout en France. Disponible immédiatement. Le plus simple est de m'écrire : je réponds rapidement.",
-      en: "I'm open to permanent or fixed-term engineering roles, as well as freelance assignments, anywhere in France. Available now. The easiest way to reach me is by email; I reply quickly.",
+      fr: "Je suis ouvert aux postes d'ingénieur en CDI, partout en France. Disponible immédiatement. Le plus simple est de m'écrire : je réponds rapidement.",
+      en: "I'm open to permanent engineering roles anywhere in France. Available now. The easiest way to reach me is by email; I reply quickly.",
     },
     email: { fr: "M'écrire", en: 'Email me' },
     phone: { fr: "M'appeler", en: 'Call me' },

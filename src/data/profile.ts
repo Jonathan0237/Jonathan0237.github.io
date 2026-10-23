@@ -30,8 +30,8 @@ export const profile = {
     en: 'I integrate systems, make software reliable and support projects in industrial environments, from requirements analysis all the way to production.',
   } as L,
   availability: {
-    fr: 'Disponible immédiatement · CDI, CDD ou freelance',
-    en: 'Available now · Permanent, fixed-term or freelance',
+    fr: 'Disponible immédiatement · CDI partout en France',
+    en: 'Available now · Permanent roles across France',
   } as L,
   location: { fr: 'Île-de-France · mobile partout en France · permis B', en: 'Paris area · open to relocation in France · driving licence (B)' } as L,
   email: 'simojonathan02@gmail.com',
