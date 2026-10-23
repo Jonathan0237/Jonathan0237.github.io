@@ -30,8 +30,8 @@ export const profile = {
     en: 'I integrate systems, make software reliable and support projects in industrial environments, from requirements analysis all the way to production.',
   } as L,
   availability: {
-    fr: 'Disponible immédiatement · CDI partout en France',
-    en: 'Available now · Full-time roles across France',
+    fr: 'Disponible immédiatement · CDI, CDD ou freelance',
+    en: 'Available now · Permanent, fixed-term or freelance',
   } as L,
   location: { fr: 'Île-de-France · mobile partout en France', en: 'Paris area · open to relocation in France' } as L,
   email: 'simojonathan02@gmail.com',
@@ -130,9 +130,7 @@ export const experiences: Experience[] = [
     bubbles: [
       { icon: 'box', label: { fr: 'Suivi des stocks', en: 'Stock monitoring' } },
       { icon: 'truck', label: { fr: 'Arrivages', en: 'Incoming goods' } },
-      { icon: 'calendar', label: { fr: 'Contrôle des dates', en: 'Expiry checks' } },
       { icon: 'tag', label: { fr: 'Mise en rayon', en: 'Shelf placement' } },
-      { icon: 'users', label: { fr: 'Relation managers', en: 'Store managers' } },
       { icon: 'globe', label: { fr: 'SIAL Paris 2026', en: 'SIAL Paris 2026' } },
     ],
     points: [
@@ -145,14 +143,6 @@ export const experiences: Experience[] = [
         en: 'Tracking incoming goods and checking shelf placement: right locations, neat presentation, products always within customers’ reach.',
       },
       {
-        fr: 'Contrôle qualité des dates de péremption et rotation des produits (premier périmé, premier sorti) pour limiter les pertes.',
-        en: 'Quality control of expiry dates and stock rotation (first expired, first out) to limit losses.',
-      },
-      {
-        fr: 'Échanges avec les managers de magasin et remontées terrain structurées (stocks, ruptures, dates) pour aider la direction à piloter les commandes.',
-        en: 'Working with store managers and reporting structured field data (stock, stock-outs, dates) to help management steer orders.',
-      },
-      {
         fr: 'Visite du SIAL Paris 2026 pour le compte de l’entreprise (17–21 octobre, Paris-Nord Villepinte), le plus grand salon mondial de l’alimentation : repérage de fournisseurs et de partenaires, veille produits et tendances du marché.',
         en: 'Visited SIAL Paris 2026 on behalf of the company (17–21 October, Paris-Nord Villepinte), the world’s largest food trade show: scouting suppliers and partners, product and market watch.',
       },
@@ -162,7 +152,7 @@ export const experiences: Experience[] = [
       video: { src: '/media/sial-villepinte.mp4', poster: '/media/sial-villepinte.jpg' },
       caption: { fr: 'Au SIAL Paris 2026, Paris-Nord Villepinte', en: 'At SIAL Paris 2026, Paris-Nord Villepinte' },
     },
-    tags: ['Gestion de stock', 'Merchandising', 'Qualité · DLC', 'Relation B2B', 'Reporting terrain', 'Agroalimentaire'],
+    tags: ['Gestion de stock', 'Merchandising', 'Relation B2B', 'Agroalimentaire'],
   },
   {
     role: { fr: 'Ingénieur DevOps Test Système', en: 'DevOps System Test Engineer' },
@@ -278,7 +268,6 @@ export const experiences: Experience[] = [
     bubbles: [
       { icon: 'box', label: { fr: 'Gestion des stocks', en: 'Stock management' } },
       { icon: 'monitor', label: { fr: 'Outils de gestion du magasin', en: 'Store management tools' } },
-      { icon: 'tag', label: { fr: 'Mise en rayon', en: 'Visual merchandising' } },
       { icon: 'heart', label: { fr: 'Relation client', en: 'Customer care' } },
       { icon: 'globe', label: { fr: 'Clientèle internationale', en: 'International customers' } },
       { icon: 'users', label: { fr: 'Travail en équipe', en: 'Teamwork' } },
@@ -291,10 +280,6 @@ export const experiences: Experience[] = [
       {
         fr: 'Utilisation des outils informatiques du magasin pour suivre les stocks, participer aux inventaires et retrouver une taille ou une couleur pour un client.',
         en: 'Using the store’s IT tools to track stock, take part in inventories and find a size or colour for a customer.',
-      },
-      {
-        fr: 'Mise en place des collections en rayon selon les codes visuels de la marque.',
-        en: 'Setting up collections on the shelves following the brand’s visual guidelines.',
       },
       {
         fr: 'Accueil, écoute et conseil d’une clientèle internationale, en français et en anglais, jusqu’à la vente.',
@@ -314,7 +299,7 @@ export const experiences: Experience[] = [
       },
       caption: { fr: 'Boutique du centre Beaugrenelle, Paris 15e', en: 'Store in the Beaugrenelle centre, Paris' },
     },
-    tags: ['Gestion de stock', 'Relation client', 'Merchandising', 'Outils de gestion', 'Anglais', 'Retail'],
+    tags: ['Gestion de stock', 'Relation client', 'Outils de gestion', 'Anglais', 'Retail'],
   },
   {
     role: { fr: 'Assistant informatique & bureautique', en: 'IT & Office Assistant' },
@@ -350,10 +335,6 @@ export const experiences: Experience[] = [
       {
         fr: 'Assistance au personnel dans l’utilisation des postes et des logiciels du quotidien.',
         en: 'Helping staff with their computers and everyday software.',
-      },
-      {
-        fr: 'Découverte de la circulation de l’information entre les services d’un hôpital.',
-        en: 'First-hand view of how information flows between hospital departments.',
       },
     ],
     media: {
@@ -593,8 +574,8 @@ export const softSkills: { icon: string; title: L; proof: L }[] = [
     icon: 'heart',
     title: { fr: 'Écoute et sens du client', en: 'Listening and customer focus' },
     proof: {
-      fr: 'Conseil d’une clientèle internationale chez Lacoste, échanges réguliers avec les managers de magasin chez Bazar N’Guélé.',
-      en: 'Advising international customers at Lacoste, regular exchanges with store managers at Bazar N’Guélé.',
+      fr: 'Conseil d’une clientèle internationale chez Lacoste, visites régulières des magasins chez Bazar N’Guélé.',
+      en: 'Advising international customers at Lacoste, regular store visits at Bazar N’Guélé.',
     },
   },
   {
