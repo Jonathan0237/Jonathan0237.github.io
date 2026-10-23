@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base lang="fr" title="Page introuvable · Jonathan Simo Kuate" description="Cette page n'existe pas." altPath="/en/">
+  <section class="container nf">
+    <p class="eyebrow">404</p>
+    <h1>Page introuvable</h1>
+    <p class="muted">Cette page n'existe pas ou a été déplacée. · This page doesn't exist.</p>
+    <a href="/" class="btn btn-primary">Retour à l'accueil</a>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+  }
+</style>

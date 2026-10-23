@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProjectDetail from '../../components/ProjectDetail.astro';
+import { missions, projectName, type Project } from '../../data/projects';
+import { missionPath, t } from '../../i18n';
+
+export function getStaticPaths() {
+  return missions.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+---
+
+<Base
+  lang="fr"
+  type="article"
+  title={`${projectName(project, 'fr')} · Jonathan Simo Kuate`}
+  description={t(project.summary, 'fr')}
+  altPath={missionPath(project.slug, 'en')}
+>
+  <ProjectDetail project={project} lang="fr" mission />
+</Base>

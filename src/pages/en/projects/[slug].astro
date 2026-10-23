@@ -1,0 +1,22 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProjectDetail from '../../../components/ProjectDetail.astro';
+import { projectName, projects, type Project } from '../../../data/projects';
+import { projectPath, t } from '../../../i18n';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props as { project: Project };
+---
+
+<Base
+  lang="en"
+  type="article"
+  title={`${projectName(project, 'en')} · Jonathan Simo Kuate`}
+  description={t(project.summary, 'en')}
+  altPath={projectPath(project.slug, 'fr')}
+>
+  <ProjectDetail project={project} lang="en" />
+</Base>

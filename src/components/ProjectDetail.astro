@@ -1,0 +1,755 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import ProjectCover from './ProjectCover.astro';
+import Diagram from './Diagram.astro';
+import { missions, projectName, projects, type Project } from '../data/projects';
+import { homePath, missionPath, projectPath, t, ui, type Lang } from '../i18n';
+
+interface Props {
+  project: Project;
+  lang: Lang;
+  /** Mission d'alternance : retour vers le parcours et navigation entre missions. */
+  mission?: boolean;
+}
+const { project: p, lang, mission = false } = Astro.props;
+const name = projectName(p, lang);
+const list = mission ? missions : projects;
+const idx = list.findIndex((x) => x.slug === p.slug);
+const next = list[(idx + 1) % list.length];
+const pathFor = mission ? missionPath : projectPath;
+// « 20+ » → compteur 20 suivi de « + » ; une valeur non numérique reste telle quelle.
+const metrics = (p.metrics ?? []).map((m) => {
+  const match = m.value.match(/^(\d+)(.*)$/);
+  return { ...m, num: match ? Number(match[1]) : null, rest: match ? match[2] : m.value };
+});
+---
+
+<article class="container detail">
+  <a href={`${homePath(lang)}${mission ? '#parcours' : '#projets'}`} class="back link"><Icon name="arrowLeft" size={16} /> {t(mission ? ui.project.backMission : ui.project.back, lang)}</a>
+
+  <header class="head">
+    <div class="badges">
+      {mission ? (
+        <span class="badge"><Icon name="briefcase" size={12} /> {t(ui.project.mission, lang)}</span>
+      ) : (
+        <>
+          <span class="badge">{t(ui.categories[p.category], lang)}</span>
+          <span class="badge soft">{t(ui.states[p.state], lang)}</span>
+        </>
+      )}
+    </div>
+    <h1>{name}</h1>
+    <p class="lead muted">{t(p.summary, lang)}</p>
+    <div class="actions">
+      {p.repo && (
+        <a href={p.repo} class="btn btn-primary" target="_blank" rel="noopener"><Icon name="github" size={18} /> {t(ui.project.code, lang)}</a>
+      )}
+      {p.demo && (
+        <a href={p.demo} class="btn btn-ghost" target="_blank" rel="noopener"><Icon name="external" size={18} /> {t(ui.project.demo, lang)}</a>
+      )}
+    </div>
+  </header>
+
+  <dl class="facts card">
+    <div><dt>{t(ui.project.context, lang)}</dt><dd>{t(p.context, lang)}</dd></div>
+    <div><dt>{t(ui.project.role, lang)}</dt><dd>{t(p.role, lang)}</dd></div>
+    <div><dt>{t(ui.project.period, lang)}</dt><dd>{t(p.period, lang)}</dd></div>
+    <div>
+      <dt>{t(ui.project.stack, lang)}</dt>
+      <dd><ul class="tags">{p.stack.map((s) => <li class="tag">{s}</li>)}</ul></dd>
+    </div>
+  </dl>
+
+  {p.video && (
+    <figure class="pvideo reveal">
+      <div class="pvideo-frame">
+        <video
+          src={`/media/projets/${p.slug}-${lang}.mp4`}
+          poster={`/media/projets/${p.slug}-${lang}.jpg`}
+          muted
+          loop
+          playsinline
+          controls
+          preload="none"
+          data-autoplay
+          aria-label={`${t(ui.project.video, lang)} · ${name}`}
+        ></video>
+      </div>
+      <figcaption class="muted"><Icon name="play" size={14} /> <b>{t(ui.project.video, lang)}</b> · {t(ui.project.videoNote, lang)}</figcaption>
+    </figure>
+  )}
+
+  {metrics.length > 0 && (
+    <ul class="metrics stagger">
+      {metrics.map((m) => (
+        <li class="metric card">
+          <strong class="gradient-text">{m.num !== null ? <><span data-count={m.num}>{m.num}</span>{m.rest}</> : m.rest}</strong>
+          <span class="metric-label muted">{t(m.label, lang)}</span>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {p.visuals && (
+    <div class:list={['visuals', { single: p.visuals.length === 1, pair: p.pair }]}>
+      {p.visuals.map((v, i) => (
+        <figure class="visual reveal">
+          <Image src={v.src} alt={t(v.alt, lang)} widths={[480, 760, 1100]} sizes="(max-width: 760px) 92vw, 450px" loading={i === 0 ? 'eager' : 'lazy'} />
+          <figcaption class="muted">{t(v.alt, lang)}{v.credit && <span class="credit"> · {v.credit}</span>}</figcaption>
+        </figure>
+      ))}
+    </div>
+  )}
+
+  {p.diagram ? (
+    <section class="arch">
+      <h2>{t(ui.project.architecture, lang)}</h2>
+      <Diagram id={p.diagram} lang={lang} />
+    </section>
+  ) : (
+    !p.shots && !p.visuals && <div class="hero-cover"><ProjectCover project={p} alt={name} large eager /></div>
+  )}
+
+  {mission ? (
+    <p class="note"><Icon name="lock" size={16} /> {t(ui.project.confidential, lang)}</p>
+  ) : (
+    <p class="note"><Icon name="sparkles" size={16} /> {t(ui.project.evolving, lang)}</p>
+  )}
+
+  <div class="story">
+    <section>
+      <h2>{t(mission ? ui.project.context2 : ui.project.challenge, lang)}</h2>
+      <p>{t(p.challenge, lang)}</p>
+    </section>
+    {p.themes && (
+      <section>
+        <h2>{t(ui.project.themes, lang)}</h2>
+        <ul class="themes">
+          {p.themes.map((th) => (
+            <li class="theme card reveal">
+              <span class="theme-icon"><Icon name={th.icon} size={20} /></span>
+              <h3>{t(th.title, lang)}</h3>
+              <p class="muted">{t(th.text, lang)}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {p.approach && (
+      <section>
+        <h2>{t(ui.project.approach, lang)}</h2>
+        <ul class="steps">{p.approach.map((a) => <li>{t(a, lang)}</li>)}</ul>
+      </section>
+    )}
+    {p.chapters && (
+      <section>
+        <h2>{t(ui.project.approach, lang)}</h2>
+        <ol class="chapters">
+          {p.chapters.map((c, i) => (
+            <li class="chapter reveal">
+              <p class="chapter-num">{String(i + 1).padStart(2, '0')}</p>
+              <h3>{t(c.title, lang)}</h3>
+              <p>{t(c.text, lang)}</p>
+              {c.points && (
+                <ul class="chapter-points">{c.points.map((pt) => <li>{t(pt, lang)}</li>)}</ul>
+              )}
+              {c.diagram && <Diagram id={c.diagram} lang={lang} />}
+              {c.compare && (
+                <div class="compare-wrap">
+                  <table class="compare">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col" class="before">{t(c.compare.before, lang)}</th>
+                        <th scope="col" class="after">{t(c.compare.after, lang)}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {c.compare.rows.map((r) => (
+                        <tr>
+                          <th scope="row">{t(r.label, lang)}</th>
+                          <td class="before"><Icon name="close" size={14} /> {t(r.before, lang)}</td>
+                          <td class="after"><Icon name="check" size={14} /> {t(r.after, lang)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+    {p.outcome && (
+      <section>
+        <h2>{t(ui.project.outcome, lang)}</h2>
+        <ul class="outcomes">
+          {p.outcome.map((o) => <li><Icon name="check" size={18} /> <span>{t(o, lang)}</span></li>)}
+        </ul>
+      </section>
+    )}
+    {p.learned && (
+      <section>
+        <h2>{t(ui.project.learned, lang)}</h2>
+        <p>{t(p.learned, lang)}</p>
+      </section>
+    )}
+  </div>
+
+  {p.screens && (
+    <section class="gallery-wrap">
+      <h2>{t(ui.project.gallery, lang)}</h2>
+      <ul class="screens">
+        {p.screens.map((s, i) => (
+          <li class="reveal">
+            <figure>
+              <div class="win">
+                <div class="win-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                <Image src={s.src} alt={t(s.alt, lang)} widths={[440, 880, 1320]} sizes={i === 0 ? '(max-width: 920px) 92vw, 880px' : '(max-width: 760px) 92vw, 440px'} loading={i < 2 ? 'eager' : 'lazy'} />
+              </div>
+              <figcaption class="muted">{t(s.alt, lang)}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  {p.shots && (
+    <section class="gallery-wrap">
+      <h2>{t(ui.project.gallery, lang)}</h2>
+      <ul class="gallery">
+        {p.shots.map((s, i) => (
+          <li>
+            <figure>
+              <div class="frame">
+                <Image src={s.src} alt={t(s.alt, lang)} widths={[260, 390, 520]} sizes="(max-width: 640px) 70vw, 260px" loading={i < 3 ? 'eager' : 'lazy'} />
+              </div>
+              <figcaption class="muted">{t(s.alt, lang)}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <a href={pathFor(next.slug, lang)} class="next card">
+    <span class="muted">{t(mission ? ui.project.nextMission : ui.project.next, lang)}</span>
+    <strong>{projectName(next, lang)} <Icon name="arrowRight" size={20} /></strong>
+  </a>
+</article>
+
+<script>
+  // Lance la vidéo de présentation quand elle entre à l'écran, la met en pause sinon.
+  const vids = document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]');
+  if (vids.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        }),
+      { threshold: 0.5 },
+    );
+    vids.forEach((v) => io.observe(v));
+  }
+</script>
+
+<style>
+  .detail {
+    max-width: 920px;
+    padding-top: 48px;
+  }
+  .back {
+    font-size: 0.92rem;
+  }
+  .head {
+    margin: 36px 0 32px;
+  }
+  .badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-weight: 600;
+  }
+  .badge.soft {
+    background: var(--bg-soft);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  h1 {
+    font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+  .lead {
+    font-size: 1.15rem;
+    margin-top: 16px;
+    max-width: 720px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 26px;
+  }
+  .facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 32px;
+    padding: 26px 28px;
+    margin: 0 0 32px;
+  }
+  .facts dt {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .facts dd {
+    margin: 0;
+    font-size: 0.97rem;
+  }
+  .hero-cover,
+  .arch {
+    margin-bottom: 32px;
+  }
+  .arch h2 {
+    font-size: 1.45rem;
+    margin-bottom: 16px;
+  }
+  .note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: var(--bg-soft);
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-bottom: 16px;
+  }
+  .note :global(svg) {
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .story section {
+    margin-top: 44px;
+  }
+  .story h2,
+  .gallery-wrap h2 {
+    font-size: 1.45rem;
+    margin-bottom: 16px;
+  }
+  .story p {
+    font-size: 1.05rem;
+  }
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 48px;
+  }
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 2px 7px;
+  }
+  .themes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .theme {
+    padding: 20px 22px;
+  }
+  .theme-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .theme h3 {
+    margin-top: 12px;
+    font-size: 1.05rem;
+  }
+  .theme p {
+    margin-top: 6px;
+    font-size: 0.95rem;
+  }
+  .outcomes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .outcomes li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .outcomes :global(svg) {
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .gallery-wrap {
+    margin-top: 64px;
+  }
+  .screens {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+  .screens li:first-child {
+    grid-column: 1 / -1;
+  }
+  .win {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    background: #f4f4f4;
+    transition: transform 0.4s ease;
+  }
+  .win:hover {
+    transform: translateY(-4px);
+  }
+  .win-bar {
+    display: flex;
+    gap: 6px;
+    padding: 9px 12px;
+    background: #1b222b;
+  }
+  .win-bar span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ef4444;
+  }
+  .win-bar span:nth-child(2) { background: #f59e0b; }
+  .win-bar span:nth-child(3) { background: #22c55e; }
+  .win :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .metrics {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .metric {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px 18px 16px;
+  }
+  .metric strong {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .metric-label {
+    font-size: 0.86rem;
+    line-height: 1.4;
+  }
+  .visuals {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .visuals.single {
+    grid-template-columns: minmax(0, 420px);
+  }
+  .visuals.pair {
+    grid-template-columns: 1fr 1fr;
+  }
+  .visuals.pair .visual :global(img) {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+  .visuals.single .visual :global(img) {
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+  .visual :global(img) {
+    display: block;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+  .visual figcaption {
+    text-align: left;
+    font-size: 0.82rem;
+  }
+  .credit {
+    font-style: italic;
+  }
+  .chapters {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .chapter {
+    position: relative;
+    padding: 24px 26px 26px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--bg-elev);
+  }
+  .chapter::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 22px;
+    bottom: 22px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--gradient);
+  }
+  .chapter-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .chapter h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .chapter > p {
+    font-size: 1rem;
+  }
+  .chapter-points {
+    margin: 12px 0 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--text-muted);
+  }
+  .chapter-points li::marker {
+    color: var(--accent);
+  }
+  .chapter :global(.diagram) {
+    margin-top: 18px;
+  }
+  .compare-wrap {
+    margin-top: 18px;
+    overflow-x: auto;
+  }
+  .compare {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9rem;
+  }
+  .compare th,
+  .compare td {
+    text-align: left;
+    vertical-align: top;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare thead th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .compare thead .before {
+    color: var(--text-muted);
+  }
+  .compare thead .after {
+    color: var(--accent);
+  }
+  .compare tbody th {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .compare td.before {
+    color: var(--text-muted);
+  }
+  .compare td.after {
+    background: var(--accent-soft);
+  }
+  .compare td :global(svg) {
+    vertical-align: -2px;
+    margin-right: 4px;
+  }
+  .compare td.before :global(svg) {
+    color: #e5484d;
+  }
+  .compare td.after :global(svg) {
+    color: var(--accent);
+  }
+  .compare tbody tr:last-child th,
+  .compare tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .gallery {
+    list-style: none;
+    padding: 0 0 12px;
+    margin: 0;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 240px;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .gallery li {
+    scroll-snap-align: start;
+  }
+  .frame {
+    border-radius: 22px;
+    overflow: hidden;
+    border: 6px solid #0c1116;
+    box-shadow: var(--shadow);
+    background: #0c1116;
+  }
+  figure {
+    margin: 0;
+  }
+  figcaption {
+    font-size: 0.85rem;
+    margin-top: 10px;
+    text-align: center;
+  }
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 72px;
+    padding: 26px 28px;
+  }
+  .next strong {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4rem;
+  }
+  .next:hover {
+    border-color: var(--accent);
+  }
+  .next:hover strong {
+    color: var(--accent);
+  }
+  .pvideo {
+    margin: 0 0 56px;
+  }
+  .pvideo-frame {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #0b0f14;
+    box-shadow: 0 30px 70px -40px rgb(0 0 0 / 0.7);
+    aspect-ratio: 16 / 9;
+  }
+  .pvideo video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pvideo figcaption {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-size: 0.9rem;
+  }
+  .pvideo figcaption b {
+    color: var(--text);
+  }
+  @media (max-width: 640px) {
+    .detail {
+      padding-top: 28px;
+    }
+    .facts {
+      grid-template-columns: 1fr;
+      padding: 22px 20px;
+    }
+    .gallery {
+      grid-auto-columns: 70%;
+    }
+    .metrics {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .screens {
+      grid-template-columns: 1fr;
+    }
+    .visuals,
+    .visuals.pair {
+      grid-template-columns: 1fr;
+    }
+    .themes {
+      grid-template-columns: 1fr;
+    }
+    .visual :global(img) {
+      height: 200px;
+    }
+    .chapter {
+      padding: 20px 18px 22px;
+    }
+  }
+</style>

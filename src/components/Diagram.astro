@@ -1,0 +1,216 @@
+---
+import { diagrams, type DNode } from '../data/diagrams';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  id: string;
+  lang: Lang;
+}
+const { id, lang } = Astro.props;
+const d = diagrams[id];
+const H = 64;
+const W = 140;
+const byId = Object.fromEntries(d.nodes.map((n) => [n.id, n]));
+
+// Point où la droite entre deux centres sort du rectangle du nœud.
+const exit = (n: DNode, tx: number, ty: number) => {
+  const w = (n.w ?? W) / 2 + 6;
+  const h = H / 2 + 6;
+  const dx = tx - n.x;
+  const dy = ty - n.y;
+  const s = Math.min(dx ? w / Math.abs(dx) : Infinity, dy ? h / Math.abs(dy) : Infinity);
+  return { x: n.x + dx * s, y: n.y + dy * s };
+};
+
+const edges = d.edges.map((e, i) => {
+  const a = byId[e.from];
+  const b = byId[e.to];
+  const p1 = exit(a, b.x, b.y);
+  const p2 = exit(b, a.x, a.y);
+  return {
+    ...e,
+    path: `M${p1.x.toFixed(1)},${p1.y.toFixed(1)} L${p2.x.toFixed(1)},${p2.y.toFixed(1)}`,
+    mid: { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 },
+    delay: (i * 0.45) % 2.4,
+    lw: e.label ? Math.max(28, t(e.label, lang).length * 7.2 + 18) : 0,
+  };
+});
+const uid = `dg-${id}`;
+---
+
+<figure class="diagram reveal">
+  <svg viewBox={`0 0 ${d.width} ${d.height}`} role="img" aria-label={t(d.caption, lang)}>
+    <defs>
+      <marker id={`${uid}-arrow`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" class="arrow-head" />
+      </marker>
+      <linearGradient id={`${uid}-grad`} x1="0" x2="1">
+        <stop offset="0%" stop-color="#5eead4" />
+        <stop offset="100%" stop-color="#a78bfa" />
+      </linearGradient>
+    </defs>
+
+    {d.groups?.map((g) => (
+      <g class="group">
+        <rect x={g.x} y={g.y} width={g.w} height={g.h} rx="18" />
+        <text x={g.x + 16} y={g.y + 24}>{t(g.label, lang)}</text>
+      </g>
+    ))}
+
+    {edges.map((e) => (
+      <g class:list={['edge', { dashed: e.dashed }]}>
+        <path d={e.path} class="track" marker-end={`url(#${uid}-arrow)`} />
+        <path d={e.path} class="flow" style={`animation-delay:-${e.delay}s`} stroke={`url(#${uid}-grad)`} />
+        <circle r="4" class="packet">
+          <animateMotion dur="2.4s" repeatCount="indefinite" begin={`-${e.delay}s`} path={e.path} />
+        </circle>
+        {e.label && (
+          <g class="edge-label">
+            <rect x={e.mid.x - e.lw / 2} y={e.mid.y - 22} width={e.lw} height="20" rx="10" />
+            <text x={e.mid.x} y={e.mid.y - 8}>{t(e.label, lang)}</text>
+          </g>
+        )}
+      </g>
+    ))}
+
+    {d.nodes.map((n, i) => {
+      const w = n.w ?? W;
+      return (
+        <g class="node" style={`--h:${n.hue};--i:${i}`}>
+          <rect x={n.x - w / 2} y={n.y - H / 2} width={w} height={H} rx="14" />
+          <circle cx={n.x - w / 2 + 14} cy={n.y - H / 2 + 14} r="4" class="led" />
+          <text x={n.x} y={n.y - 2} class="label">{t(n.label, lang)}</text>
+          {n.sub && <text x={n.x} y={n.y + 17} class="sub">{t(n.sub, lang)}</text>}
+        </g>
+      );
+    })}
+  </svg>
+  <figcaption class="muted">{t(d.caption, lang)}</figcaption>
+</figure>
+
+<style>
+  .diagram {
+    margin: 0;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+      radial-gradient(var(--border) 1px, transparent 1px) 0 0 / 18px 18px,
+      var(--bg-elev);
+    overflow-x: auto;
+  }
+  svg {
+    width: 100%;
+    min-width: 620px;
+    height: auto;
+    display: block;
+    font-family: var(--font-sans);
+  }
+  .group rect {
+    fill: var(--accent-soft);
+    stroke: var(--accent);
+    stroke-dasharray: 6 6;
+    stroke-opacity: 0.5;
+  }
+  .group text {
+    fill: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .track {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 2;
+  }
+  .arrow-head {
+    fill: var(--text-muted);
+  }
+  .flow {
+    fill: none;
+    stroke-width: 2.5;
+    stroke-dasharray: 8 10;
+    animation: dash 1.2s linear infinite;
+    opacity: 0.9;
+  }
+  .dashed .flow {
+    stroke-dasharray: 3 9;
+    opacity: 0.6;
+  }
+  @keyframes dash {
+    to { stroke-dashoffset: -36; }
+  }
+  .packet {
+    fill: var(--accent);
+    filter: drop-shadow(0 0 4px var(--accent));
+  }
+  .dashed .packet {
+    fill: var(--accent-3);
+    filter: drop-shadow(0 0 4px var(--accent-3));
+  }
+  .edge-label rect {
+    fill: var(--bg-elev);
+    stroke: var(--border);
+  }
+  .edge-label text {
+    fill: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-anchor: middle;
+  }
+  .node rect {
+    fill: var(--bg-elev);
+    stroke: hsl(var(--h) 70% 55%);
+    stroke-width: 1.5;
+  }
+  .node .led {
+    fill: hsl(var(--h) 75% 55%);
+    animation: led 2.4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.3s);
+  }
+  @keyframes led {
+    50% { opacity: 0.25; }
+  }
+  .node .label {
+    fill: var(--text);
+    font-size: 14px;
+    font-weight: 700;
+    text-anchor: middle;
+  }
+  .node .sub {
+    fill: var(--text-muted);
+    font-size: 11px;
+    font-family: var(--font-mono);
+    text-anchor: middle;
+  }
+  .node {
+    opacity: 0;
+    transform: translateY(8px);
+    transform-box: fill-box;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition-delay: calc(var(--i) * 0.08s);
+  }
+  :global(.is-visible) .node,
+  :global(.no-js) .node {
+    opacity: 1;
+    transform: none;
+  }
+  figcaption {
+    margin-top: 12px;
+    font-size: 0.88rem;
+    text-align: center;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,
+    .node .led {
+      animation: none;
+    }
+    .packet {
+      display: none;
+    }
+    .node {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
