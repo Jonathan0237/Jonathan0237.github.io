@@ -174,6 +174,7 @@ export const experiences: Experience[] = [
     bubbles: [
       { icon: 'bolt', label: { fr: 'IEC 61850', en: 'IEC 61850' } },
       { icon: 'server', label: { fr: 'Contrôle-commande virtualisé', en: 'Virtualised control' } },
+      { icon: 'globe', label: { fr: 'Réseaux et switchs', en: 'Networks & switches' } },
       { icon: 'target', label: { fr: 'Test et qualification', en: 'Test and qualification' } },
       { icon: 'code', label: { fr: 'Outillage Python', en: 'Python tooling' } },
       { icon: 'book', label: { fr: 'Documentation', en: 'Documentation' } },
@@ -192,6 +193,10 @@ export const experiences: Experience[] = [
       {
         fr: 'Contribution à la plateforme de test et à son outillage.',
         en: 'Contributed to the test platform and its tooling.',
+      },
+      {
+        fr: 'Mise en œuvre des réseaux de communication de la plateforme : routeurs, switchs, process bus, réseaux d’exploitation et d’administration.',
+        en: 'Worked on the platform’s communication networks: routers, switches, process bus, operations and administration networks.',
       },
       {
         fr: 'Partage des pratiques dans l’équipe : versionnement et documentation.',
@@ -529,10 +534,10 @@ export const skillDomains: SkillDomain[] = [
     icon: 'server',
     title: { fr: 'Systèmes & réseaux', en: 'Systems & networks' },
     desc: {
-      fr: 'Environnements Linux et Windows, réseaux industriels.',
-      en: 'Linux and Windows environments, industrial networks.',
+      fr: 'Environnements Linux et Windows, routeurs, switchs et réseaux de communication industriels.',
+      en: 'Linux and Windows environments, routers, switches and industrial communication networks.',
     },
-    items: ['Linux', 'Windows Server', 'Cisco Packet Tracer', 'Protocoles IEC 61850'],
+    items: ['Linux', 'Windows Server', 'Routeurs', 'Switchs', 'Réseaux de communication', 'Process bus', 'Réseaux d’exploitation et d’administration', 'Protocoles IEC 61850', 'Cisco Packet Tracer'],
     usedAt: ['Enedis'],
     hue: 220,
   },
