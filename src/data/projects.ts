@@ -440,35 +440,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'gestion-de-stock',
-    name: 'Gestion de stock',
-    category: 'software',
-    state: 'done',
-    summary: {
-      fr: 'Application Java de gestion de stock : interfaces, corrections et optimisation des fonctionnalités.',
-      en: 'Java inventory management app: interfaces, bug fixes and feature optimisation.',
-    },
-    context: {
-      fr: 'Projet d’école en classes préparatoires, Douala.',
-      en: 'School project during preparatory classes, Douala.',
-    },
-    role: { fr: 'Développement des interfaces et corrections', en: 'Interface development and bug fixing' },
-    period: { fr: 'sept. 2021 — fév. 2022', en: 'Sep 2021 — Feb 2022' },
-    stack: ['Java', 'JavaFX', 'XML'],
-    hue: 40,
-    icon: 'box',
-    challenge: {
-      fr: 'Suivre les entrées et sorties de produits de façon fiable et simple pour l’utilisateur.',
-      en: 'Track product inflows and outflows reliably and simply for the user.',
-    },
-    approach: [
-      { fr: 'Développement des interfaces JavaFX et prise en compte de la charte graphique et de l’ergonomie.', en: 'Built the JavaFX interfaces, following the visual guidelines and usability.' },
-      { fr: 'Analyse et exploitation des données de stock.', en: 'Analysis and use of inventory data.' },
-      { fr: 'Corrections des anomalies remontées et optimisation des fonctionnalités.', en: 'Fixed reported bugs and optimised features.' },
-    ],
-    outcome: [{ fr: 'Application livrée en fin de projet.', en: 'Application delivered at the end of the project.' }],
-  },
-  {
     slug: 'incubateur',
     video: true,
     name: 'Incubateur à œufs connecté',
@@ -482,7 +453,7 @@ export const projects: Project[] = [
     context: { fr: 'Projet d’école, ECAM-EPMI.', en: 'School project, ECAM-EPMI.' },
     role: { fr: 'Étude des données, maquette et programmation', en: 'Data study, mock-up and programming' },
     period: { fr: '2022 — 2023', en: '2022 — 2023' },
-    stack: ['Arduino', 'C++', 'Capteurs', 'AutoCAD'],
+    stack: ['Arduino', 'C++', 'Capteurs'],
     hue: 330,
     icon: 'egg',
     challenge: {
@@ -491,7 +462,7 @@ export const projects: Project[] = [
     },
     approach: [
       { fr: 'Étude des conditions d’incubation et choix des capteurs.', en: 'Studied incubation conditions and chose the sensors.' },
-      { fr: 'Maquette réalisée sous AutoCAD.', en: 'Mock-up designed in AutoCAD.' },
+      { fr: 'Conception et réalisation de la maquette.', en: 'Designed and built the mock-up.' },
       { fr: 'Programmation de la régulation sur Arduino.', en: 'Programmed the control loop on Arduino.' },
     ],
     outcome: [{ fr: 'Prototype conçu et présenté.', en: 'Prototype designed and presented.' }],
@@ -597,7 +568,6 @@ export const projectName = (p: Project, lang: 'fr' | 'en') => names[p.slug]?.[la
 const names: Record<string, L> = {
   enedis: { fr: 'Enedis · Intégration et test système', en: 'Enedis · System integration and test' },
   'alfa-laval': { fr: 'Alfa Laval · Évolution d’un logiciel métier', en: 'Alfa Laval · Evolving a business application' },
-  'gestion-de-stock': { fr: 'Gestion de stock', en: 'Inventory management' },
   'pole-it': { fr: 'Pôle IT · ECAM-EPMI', en: 'IT department · ECAM-EPMI' },
   'suivi-stock-excel': { fr: 'Suivi de stock Excel', en: 'Excel stock tracker' },
   incubateur: { fr: 'Incubateur à œufs connecté', en: 'Connected egg incubator' },

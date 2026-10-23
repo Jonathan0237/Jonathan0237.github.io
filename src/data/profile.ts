@@ -57,7 +57,7 @@ export const profile = {
   stats: [
     { value: 3, suffix: '', label: { fr: "ans d'alternance en industrie", en: 'years of industrial work-study' } },
     { value: 5, suffix: '', label: { fr: 'expériences en entreprise', en: 'professional experiences' } },
-    { value: 7, suffix: '', label: { fr: 'projets personnels et d’école', en: 'personal and school projects' } },
+    { value: 6, suffix: '', label: { fr: 'projets personnels et d’école', en: 'personal and school projects' } },
     { value: 6, prefix: 'Bac+', suffix: '', label: { fr: 'Ingénieur CTI + Mastère Spécialisé', en: 'MEng + post-master degree' } },
   ] as { value: number; prefix?: string; suffix: string; label: L }[],
 };
@@ -529,29 +529,18 @@ export const skillDomains: SkillDomain[] = [
       fr: 'Du logiciel métier Java à l’application web moderne.',
       en: 'From business Java software to modern web apps.',
     },
-    items: ['Java', 'Spring Boot', 'JavaFX', 'Python', 'TypeScript', 'Next.js', 'React', 'NestJS', 'JavaScript', 'HTML / CSS', 'PHP', 'C / C++', 'VBA'],
+    items: ['Java', 'Spring Boot', 'JavaFX', 'Python', 'TypeScript', 'Next.js', 'React', 'NestJS', 'JavaScript', 'HTML / CSS', 'PHP', 'API REST', 'C / C++', 'VBA'],
     usedAt: ['Alfa Laval', 'JHouns', 'Jestion'],
     hue: 290,
-  },
-  {
-    icon: 'plug',
-    title: { fr: 'Intégration & fiabilité', en: 'Integration & reliability' },
-    desc: {
-      fr: 'Connecter des systèmes entre eux sans jamais bloquer l’utilisateur.',
-      en: 'Connecting systems without ever blocking the user.',
-    },
-    items: ['API REST', 'Authentification par token', 'TLS / keystore', 'Asynchrone', 'Mécanismes de repli', 'Logs corrélés', 'JSON / XML'],
-    usedAt: ['Alfa Laval'],
-    hue: 20,
   },
   {
     icon: 'database',
     title: { fr: 'Données & tableaux de bord', en: 'Data & dashboards' },
     desc: {
-      fr: 'Modéliser, stocker et exploiter les données, de la base géographique au tableau de bord Excel.',
-      en: 'Model, store and use data, from geographic databases to Excel dashboards.',
+      fr: 'Modéliser, stocker et exploiter les données, de la base SQL au tableau de bord Excel.',
+      en: 'Model, store and use data, from SQL databases to Excel dashboards.',
     },
-    items: ['SQL', 'PostgreSQL', 'PostGIS', 'MySQL', 'SQLite', 'Access', 'Excel avancé', 'Tableaux de bord', 'Mise en forme conditionnelle'],
+    items: ['SQL', 'PostgreSQL', 'MySQL', 'SQLite', 'Access', 'Excel avancé', 'Tableaux de bord', 'Mise en forme conditionnelle'],
     usedAt: ['Alfa Laval', 'JHouns', 'SSOCE', 'Suivi de stock Excel'],
     hue: 140,
   },
@@ -573,7 +562,7 @@ export const skillDomains: SkillDomain[] = [
       fr: 'Ma formation d’origine : énergie, électronique et systèmes embarqués.',
       en: 'My original training: energy, electronics and embedded systems.',
     },
-    items: ['Efficacité énergétique', 'Bâtiment à énergie positive', 'Électronique de puissance', 'Arduino', 'Matlab', 'Proteus', 'AutoCAD', 'Archicad'],
+    items: ['Efficacité énergétique', 'Bâtiment à énergie positive', 'Électronique de puissance', 'Arduino', 'Matlab'],
     usedAt: ['ECAM-EPMI', 'SSOCE'],
     hue: 50,
   },
@@ -628,8 +617,8 @@ export const softSkills: { icon: string; title: L; proof: L }[] = [
     icon: 'sparkles',
     title: { fr: 'Curiosité et apprentissage continu', en: 'Curiosity and continuous learning' },
     proof: {
-      fr: 'Mastère Spécialisé, programme McKinsey.org Forward en cours, formations en ligne et projets personnels.',
-      en: 'Post-master’s degree, McKinsey.org Forward programme in progress, online courses and personal projects.',
+      fr: 'Mastère Spécialisé, formations en ligne et projets personnels.',
+      en: 'Post-master’s degree, online courses and personal projects.',
     },
   },
   {
@@ -653,21 +642,6 @@ export type Cert = {
 };
 
 export const certifications: Cert[] = [
-  {
-    name: { fr: 'McKinsey.org Forward Program', en: 'McKinsey.org Forward Program' },
-    issuer: 'McKinsey.org',
-    date: {
-      fr: 'en cours depuis oct. 2026 · 10 semaines : résolution de problèmes, communication, numérique et IA',
-      en: 'in progress since Oct 2026 · 10 weeks: problem solving, communication, digital & AI',
-    },
-    status: 'progress',
-  },
-  {
-    name: { fr: 'AWS Certified Cloud Practitioner', en: 'AWS Certified Cloud Practitioner' },
-    issuer: 'Amazon Web Services',
-    date: { fr: 'en préparation', en: 'in progress' },
-    status: 'progress',
-  },
   {
     name: { fr: 'DELF, niveau B2', en: 'DELF, B2 level' },
     issuer: 'France Éducation international',
@@ -699,11 +673,6 @@ export const certifications: Cert[] = [
     issuer: 'Udemy',
     date: { fr: '2023', en: '2023' },
     url: 'https://www.udemy.com/certificate/UC-b585a2fb-f07e-4a7f-925b-0690882e2f33/',
-  },
-  {
-    name: { fr: 'SQL pour la Data Science', en: 'SQL for Data Science' },
-    issuer: 'Udemy',
-    date: { fr: '2023', en: '2023' },
   },
 ];
 

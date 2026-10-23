@@ -1335,6 +1335,12 @@ const filters = [
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
   }
+  /* Dernière ligne incomplète sur 3 colonnes : la dernière carte prend la place libre. */
+  @media (min-width: 981px) {
+    .skills-grid > .skill:last-child:nth-child(3n + 2) {
+      grid-column: span 2;
+    }
+  }
   .skill {
     padding: 24px;
     display: flex;
