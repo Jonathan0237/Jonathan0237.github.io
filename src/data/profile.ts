@@ -168,8 +168,8 @@ export const experiences: Experience[] = [
     period: { fr: 'sept. 2025 — sept. 2026', en: 'Sep 2025 — Sep 2026' },
     type: { fr: 'Alternance · 12 mois', en: 'Work-study · 12 months' },
     summary: {
-      fr: 'Au sein de la Direction Technique, j’ai participé à un programme de modernisation du contrôle-commande des postes électriques, côté intégration et test système.',
-      en: 'In the Technical Department, I took part in a programme modernising the control systems of electrical substations, on the system integration and test side.',
+      fr: 'Au sein de la Direction Technique, j’ai participé à la mise en place de la nouvelle génération de contrôle-commande des postes électriques, au sein du lot intégration et test système.',
+      en: 'In the Technical Department, I took part in rolling out the new generation of substation control systems, within the system integration and test work package.',
     },
     bubbles: [
       { icon: 'bolt', label: { fr: 'IEC 61850', en: 'IEC 61850' } },

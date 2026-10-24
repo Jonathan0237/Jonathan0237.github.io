@@ -457,8 +457,8 @@ export const missions: Project[] = [
     category: 'software',
     state: 'done',
     summary: {
-      fr: 'Un an au sein de la Direction Technique d’Enedis, sur un programme de modernisation du contrôle-commande des postes électriques, côté intégration et test système.',
-      en: 'One year in Enedis’s Technical Department, on a programme modernising the control systems of electrical substations, on the system integration and test side.',
+      fr: 'Un an au sein de la Direction Technique d’Enedis, à participer à la mise en place de la nouvelle génération de contrôle-commande des postes électriques, au sein du lot intégration et test système.',
+      en: 'One year in Enedis’s Technical Department, taking part in rolling out the new generation of substation control systems, within the system integration and test work package.',
     },
     context: {
       fr: 'Enedis (groupe EDF) gère le réseau public de distribution d’électricité en France. Le programme vise à faire évoluer les équipements des postes électriques vers des solutions virtualisées et normalisées.',
