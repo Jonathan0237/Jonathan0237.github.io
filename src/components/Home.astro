@@ -266,55 +266,10 @@ const filters = [
   </div>
 </section>
 
-<!-- Formations -->
-<section id="formations" class="section">
-  <div class="container">
-    <p class="eyebrow reveal">04 · {t(ui.sections.education, lang)}</p>
-    <h2 class="section-title reveal">{t(ui.sections.education, lang)}</h2>
-    <p class="section-intro reveal">{t(ui.sections.educationIntro, lang)}</p>
-    <ul class="edu-grid stagger">
-      {education.map((ed) => (
-        <li class="card edu spotlight">
-          <div class:list={['edu-art', { 'has-photo': ed.photos?.length }]} style={`--h:${ed.hue}`} data-slides={ed.photos && ed.photos.length > 1 ? '' : undefined}>
-            {ed.photos?.map((ph, i) => (
-              <Image src={ph} alt="" class:list={['edu-photo', { on: i === 0 }]} widths={[560, 900]} sizes="(max-width: 720px) 92vw, 560px" loading="lazy" />
-            ))}
-            {ed.photos && ed.photos.length > 1 && (
-              <span class="edu-dots" aria-hidden="true">{ed.photos.map((_, i) => <span class:list={{ on: i === 0 }}></span>)}</span>
-            )}
-            <span class="edu-initials" aria-hidden="true">{ed.initials}</span>
-            <Icon name="graduation" size={30} class="edu-cap" />
-            <span class="edu-year" aria-hidden="true">{ed.period}</span>
-          </div>
-          <div class="edu-body">
-            {ed.highlight && <p class="edu-highlight"><Icon name="award" size={14} /> {t(ed.highlight, lang)}</p>}
-            <h3>{t(ed.degree, lang)}</h3>
-            <p class="school">
-              {ed.url ? <a href={ed.url} target="_blank" rel="noopener">{ed.school}</a> : ed.school}
-              <span class="muted"> · {t(ed.place, lang)}</span>
-            </p>
-            <p class="muted small">{t(ed.detail, lang)}</p>
-            <p class="learned-title">{t(ui.edu.learned, lang)}</p>
-            <ul class="tags">{ed.learned.map((l) => <li class="tag">{t(l, lang)}</li>)}</ul>
-            {ed.diploma && (
-              <a class="edu-foot" href={ed.diploma.href} target="_blank" rel="noopener">
-                <span class="edu-doc" aria-hidden="true">
-                  <Image src={ed.diploma.thumb} alt="" widths={[120, 240]} sizes="96px" loading="lazy" />
-                </span>
-                <span class="link diploma"><Icon name="external" size={16} /> {t(ed.diploma.kind === 'diploma' ? ui.edu.diploma : ui.edu.attestation, lang)}</span>
-              </a>
-            )}
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
-</section>
-
 <!-- Compétences -->
 <section id="competences" class="section">
   <div class="container">
-    <p class="eyebrow reveal">05 · {t(ui.nav.skills, lang)}</p>
+    <p class="eyebrow reveal">04 · {t(ui.nav.skills, lang)}</p>
     <h2 class="section-title reveal">{t(ui.sections.skills, lang)}</h2>
     <p class="section-intro reveal">{t(ui.sections.skillsIntro, lang)}</p>
     <div class="skills-grid stagger">
@@ -384,6 +339,51 @@ const filters = [
         </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Formations -->
+<section id="formations" class="section">
+  <div class="container">
+    <p class="eyebrow reveal">05 · {t(ui.sections.education, lang)}</p>
+    <h2 class="section-title reveal">{t(ui.sections.education, lang)}</h2>
+    <p class="section-intro reveal">{t(ui.sections.educationIntro, lang)}</p>
+    <ul class="edu-grid stagger">
+      {education.map((ed) => (
+        <li class="card edu spotlight">
+          <div class:list={['edu-art', { 'has-photo': ed.photos?.length }]} style={`--h:${ed.hue}`} data-slides={ed.photos && ed.photos.length > 1 ? '' : undefined}>
+            {ed.photos?.map((ph, i) => (
+              <Image src={ph} alt="" class:list={['edu-photo', { on: i === 0 }]} widths={[560, 900]} sizes="(max-width: 720px) 92vw, 560px" loading="lazy" />
+            ))}
+            {ed.photos && ed.photos.length > 1 && (
+              <span class="edu-dots" aria-hidden="true">{ed.photos.map((_, i) => <span class:list={{ on: i === 0 }}></span>)}</span>
+            )}
+            <span class="edu-initials" aria-hidden="true">{ed.initials}</span>
+            <Icon name="graduation" size={30} class="edu-cap" />
+            <span class="edu-year" aria-hidden="true">{ed.period}</span>
+          </div>
+          <div class="edu-body">
+            {ed.highlight && <p class="edu-highlight"><Icon name="award" size={14} /> {t(ed.highlight, lang)}</p>}
+            <h3>{t(ed.degree, lang)}</h3>
+            <p class="school">
+              {ed.url ? <a href={ed.url} target="_blank" rel="noopener">{ed.school}</a> : ed.school}
+              <span class="muted"> · {t(ed.place, lang)}</span>
+            </p>
+            <p class="muted small">{t(ed.detail, lang)}</p>
+            <p class="learned-title">{t(ui.edu.learned, lang)}</p>
+            <ul class="tags">{ed.learned.map((l) => <li class="tag">{t(l, lang)}</li>)}</ul>
+            {ed.diploma && (
+              <a class="edu-foot" href={ed.diploma.href} target="_blank" rel="noopener">
+                <span class="edu-doc" aria-hidden="true">
+                  <Image src={ed.diploma.thumb} alt="" widths={[120, 240]} sizes="96px" loading="lazy" />
+                </span>
+                <span class="link diploma"><Icon name="external" size={16} /> {t(ed.diploma.kind === 'diploma' ? ui.edu.diploma : ui.edu.attestation, lang)}</span>
+              </a>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
   </div>
 </section>
 
