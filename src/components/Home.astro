@@ -38,8 +38,19 @@ const bar = (span: { start: string; end?: string }) => {
   return { left: pct(a), width: Math.max(1.4, pct(b) - pct(a)), ongoing: !span.end };
 };
 const years = Array.from({ length: now.getFullYear() - 2020 }, (_, k) => 2021 + k).map((y) => ({ y, left: pct(y * 12) }));
+// Les formations tiennent sur une seule ligne, de la première rentrée au dernier diplôme.
+const school = {
+  start: education.map((ed) => ed.span.start).sort()[0],
+  end: education.every((ed) => ed.span.end) ? education.map((ed) => ed.span.end!).sort().at(-1) : undefined,
+};
 const ganttRows = [
-  ...[...education].reverse().map((ed) => ({ label: t(ed.short, lang), org: ed.school, kind: 'formation', facets: [] as string[], ...bar(ed.span) })),
+  {
+    label: lang === 'fr' ? 'Parcours scolaire' : 'Education',
+    org: lang === 'fr' ? 'Prépa · Licence · Ingénieur · Mastère' : 'Prep · BSc · MEng · Post-master',
+    kind: 'formation',
+    facets: [] as string[],
+    ...bar(school),
+  },
   ...[...experiences].reverse().map((e) => ({ label: t(e.short, lang), org: e.company, kind: e.kind, facets: e.facets, ...bar(e.span) })),
 ];
 const todayPct = pct(nowIdx);
@@ -227,10 +238,38 @@ const filters = [
   </div>
 </section>
 
+<!-- Projets -->
+<section id="projets" class="section">
+  <div class="container">
+    <p class="eyebrow reveal">03 · {t(ui.nav.projects, lang)}</p>
+    <h2 class="section-title reveal">{t(ui.sections.projectsTitle, lang)}</h2>
+    <p class="section-intro reveal">{t(ui.sections.projectsIntro, lang)}</p>
+    <p class="evolving reveal"><span class="pulse"></span>{t(ui.project.evolvingBadge, lang)}</p>
+    <div class="filters reveal" role="tablist" aria-label={t(ui.nav.projects, lang)}>
+      {filters.map((f, i) => (
+        <button type="button" class:list={['filter', { active: i === 0 }]} data-filter={f.key} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {f.label} <span class="count">{f.count}</span>
+        </button>
+      ))}
+    </div>
+    <div class="projects-grid">
+      {projects.map((p) => (
+        <div
+          class="p-item reveal"
+          data-category={p.category}
+          data-state={p.state}
+        >
+          <ProjectCard project={p} lang={lang} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
 <!-- Formations -->
 <section id="formations" class="section">
   <div class="container">
-    <p class="eyebrow reveal">03 · {t(ui.sections.education, lang)}</p>
+    <p class="eyebrow reveal">04 · {t(ui.sections.education, lang)}</p>
     <h2 class="section-title reveal">{t(ui.sections.education, lang)}</h2>
     <p class="section-intro reveal">{t(ui.sections.educationIntro, lang)}</p>
     <ul class="edu-grid stagger">
@@ -269,34 +308,6 @@ const filters = [
         </li>
       ))}
     </ul>
-  </div>
-</section>
-
-<!-- Projets -->
-<section id="projets" class="section">
-  <div class="container">
-    <p class="eyebrow reveal">04 · {t(ui.nav.projects, lang)}</p>
-    <h2 class="section-title reveal">{t(ui.sections.projectsTitle, lang)}</h2>
-    <p class="section-intro reveal">{t(ui.sections.projectsIntro, lang)}</p>
-    <p class="evolving reveal"><span class="pulse"></span>{t(ui.project.evolvingBadge, lang)}</p>
-    <div class="filters reveal" role="tablist" aria-label={t(ui.nav.projects, lang)}>
-      {filters.map((f, i) => (
-        <button type="button" class:list={['filter', { active: i === 0 }]} data-filter={f.key} aria-pressed={i === 0 ? 'true' : 'false'}>
-          {f.label} <span class="count">{f.count}</span>
-        </button>
-      ))}
-    </div>
-    <div class="projects-grid">
-      {projects.map((p) => (
-        <div
-          class="p-item reveal"
-          data-category={p.category}
-          data-state={p.state}
-        >
-          <ProjectCard project={p} lang={lang} />
-        </div>
-      ))}
-    </div>
   </div>
 </section>
 
@@ -1767,6 +1778,52 @@ const filters = [
 </style>
 
 <script>
+  // Retour depuis une page de mission ou de projet : on revient exactement où l'on était.
+  const scrollKey = `home-scroll:${location.pathname}`;
+  const store = {
+    get: (k: string) => {
+      try {
+        return sessionStorage.getItem(k);
+      } catch {
+        return null;
+      }
+    },
+    set: (k: string, v: string) => {
+      try {
+        sessionStorage.setItem(k, v);
+      } catch {}
+    },
+    del: (k: string) => {
+      try {
+        sessionStorage.removeItem(k);
+      } catch {}
+    },
+  };
+  document
+    .querySelectorAll<HTMLAnchorElement>('a[href*="/parcours/"], a[href*="/experience/"], a[href*="/projets/"], a[href*="/projects/"]')
+    .forEach((a) => a.addEventListener('click', () => store.set(scrollKey, String(Math.round(scrollY)))));
+  const restoreScroll = () => {
+    const saved = store.get(scrollKey);
+    const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+    const back = store.get('home-return') === '1' || nav?.type === 'back_forward';
+    if (saved === null || !back) return;
+    store.del('home-return');
+    const y = Number(saved);
+    const go = () => window.scrollTo({ top: y, behavior: 'instant' as ScrollBehavior });
+    go();
+    // Les polices et les images peuvent encore décaler la page : on recale une fois tout chargé, sauf si le visiteur a déjà bougé.
+    let moved = false;
+    const stop = () => (moved = true);
+    addEventListener('wheel', stop, { once: true, passive: true });
+    addEventListener('touchstart', stop, { once: true, passive: true });
+    addEventListener('keydown', stop, { once: true });
+    const settle = () => !moved && Math.abs(scrollY - y) > 2 && go();
+    if (document.readyState === 'complete') requestAnimationFrame(settle);
+    else addEventListener('load', settle, { once: true });
+  };
+  restoreScroll();
+  addEventListener('pageshow', (e) => e.persisted && restoreScroll());
+
   // Filtres des projets.
   const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
   const items = document.querySelectorAll<HTMLElement>('.p-item');

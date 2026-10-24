@@ -26,7 +26,7 @@ const metrics = (p.metrics ?? []).map((m) => {
 ---
 
 <article class="container detail">
-  <a href={`${homePath(lang)}${mission ? '#parcours' : '#projets'}`} class="back link"><Icon name="arrowLeft" size={16} /> {t(mission ? ui.project.backMission : ui.project.back, lang)}</a>
+  <a href={`${homePath(lang)}${mission ? '#parcours' : '#projets'}`} data-home={homePath(lang)} class="back link"><Icon name="arrowLeft" size={16} /> {t(mission ? ui.project.backMission : ui.project.back, lang)}</a>
 
   <header class="head">
     <div class="badges">
@@ -242,6 +242,24 @@ const metrics = (p.metrics ?? []).map((m) => {
 </article>
 
 <script>
+  // Retour : si l'on vient de l'accueil, on y revient à l'endroit exact quitté plutôt qu'en haut de la section.
+  const backLink = document.querySelector<HTMLAnchorElement>('a.back[data-home]');
+  backLink?.addEventListener('click', (e) => {
+    const home = backLink.dataset.home!;
+    let saved: string | null = null;
+    try {
+      saved = sessionStorage.getItem(`home-scroll:${home}`);
+    } catch {}
+    if (saved === null) return;
+    e.preventDefault();
+    try {
+      sessionStorage.setItem('home-return', '1');
+    } catch {}
+    const fromHome = document.referrer && new URL(document.referrer).origin === location.origin && new URL(document.referrer).pathname === home;
+    if (fromHome && history.length > 1) history.back();
+    else location.href = home;
+  });
+
   // Lance la vidéo de présentation quand elle entre à l'écran, la met en pause sinon.
   const vids = document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]');
   if (vids.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

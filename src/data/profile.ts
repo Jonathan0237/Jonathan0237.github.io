@@ -112,7 +112,7 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    role: { fr: 'Consultant (CDD)', en: 'Consultant (fixed-term)' },
+    role: { fr: 'Consultant', en: 'Consultant' },
     short: { fr: 'Consultant', en: 'Consultant' },
     kind: 'job',
     span: { start: '2026-09', end: '2026-10' },
@@ -120,31 +120,31 @@ export const experiences: Experience[] = [
     company: "Bazar N'Guélé International",
     initials: 'BN',
     hue: 32,
-    place: { fr: 'Île-de-France · import-export agroalimentaire', en: 'Paris area · food import-export' },
+    place: { fr: 'Paris · import-export', en: 'Paris · import-export' },
     period: { fr: 'sept. 2026 — oct. 2026', en: 'Sep 2026 — Oct 2026' },
-    type: { fr: 'CDD · septembre à octobre 2026', en: 'Fixed-term · September to October 2026' },
+    type: { fr: 'Mission de conseil', en: 'Consulting assignment' },
     summary: {
-      fr: "Société d'import-export agroalimentaire dont les produits sont distribués en magasin. Sur le terrain, j'ai fait le lien entre l'entreprise et les points de vente : disponibilité des produits, qualité en rayon et relation avec les équipes des magasins.",
-      en: 'Food import-export company whose products are sold in stores. In the field, I was the link between the company and the stores: product availability, shelf quality and relations with store teams.',
+      fr: "Mission de conseil pour une société d'import-export dont les clients comptent des enseignes de la grande distribution.",
+      en: 'Consulting assignment for an import-export company whose customers include major retail chains.',
     },
     bubbles: [
-      { icon: 'box', label: { fr: 'Suivi des stocks', en: 'Stock monitoring' } },
-      { icon: 'truck', label: { fr: 'Arrivages', en: 'Incoming goods' } },
-      { icon: 'tag', label: { fr: 'Mise en rayon', en: 'Shelf placement' } },
+      { icon: 'database', label: { fr: 'Données de commandes', en: 'Order data' } },
+      { icon: 'chart', label: { fr: 'Analyse de l’activité', en: 'Activity analysis' } },
+      { icon: 'truck', label: { fr: 'Suivi des commandes', en: 'Order tracking' } },
       { icon: 'globe', label: { fr: 'SIAL Paris 2026', en: 'SIAL Paris 2026' } },
     ],
     points: [
       {
-        fr: 'Visites régulières des magasins : état des stocks, produits disponibles, ruptures à anticiper et besoins de réassort.',
-        en: 'Regular store visits: stock levels, available products, stock-outs to anticipate and replenishment needs.',
+        fr: 'Collecte, structuration et analyse des données de commandes pour suivre l’activité commerciale.',
+        en: 'Collecting, structuring and analysing order data to track sales activity.',
       },
       {
-        fr: 'Suivi des arrivages et contrôle de la mise en rayon : bons emplacements, présentation soignée, produits toujours accessibles au client.',
-        en: 'Tracking incoming goods and checking shelf placement: right locations, neat presentation, products always within customers’ reach.',
+        fr: 'Suivi des commandes des clients de la grande distribution, dont Carrefour et Auchan.',
+        en: 'Tracking orders from major retail customers, including Carrefour and Auchan.',
       },
       {
-        fr: 'Visite du SIAL Paris 2026 pour le compte de l’entreprise (17–21 octobre, Paris-Nord Villepinte), le plus grand salon mondial de l’alimentation : repérage de fournisseurs et de partenaires, veille produits et tendances du marché.',
-        en: 'Visited SIAL Paris 2026 on behalf of the company (17–21 October, Paris-Nord Villepinte), the world’s largest food trade show: scouting suppliers and partners, product and market watch.',
+        fr: 'Représentation de l’entreprise au SIAL Paris 2026 : présentation de la société et de son offre, échanges avec les professionnels du secteur.',
+        en: 'Represented the company at SIAL Paris 2026: presenting the company and its offer, meeting industry professionals.',
       },
     ],
     media: {
@@ -152,7 +152,7 @@ export const experiences: Experience[] = [
       video: { src: '/media/sial-villepinte.mp4', poster: '/media/sial-villepinte.jpg' },
       caption: { fr: 'Au SIAL Paris 2026, Paris-Nord Villepinte', en: 'At SIAL Paris 2026, Paris-Nord Villepinte' },
     },
-    tags: ['Gestion de stock', 'Merchandising', 'Relation B2B', 'Agroalimentaire'],
+    tags: ['Données de commandes', 'Suivi des commandes', 'Grande distribution', 'Import-export'],
   },
   {
     role: { fr: 'Ingénieur DevOps Test Système', en: 'DevOps System Test Engineer' },
@@ -255,7 +255,7 @@ export const experiences: Experience[] = [
     tags: ['Java', 'JavaFX', 'Spring Boot', 'API REST', 'Git'],
   },
   {
-    role: { fr: 'Conseiller de vente · stock & relation client', en: 'Sales Associate · Stock & Customer Relations' },
+    role: { fr: 'Conseiller de vente · outils numériques & stock', en: 'Sales Associate · Digital Tools & Stock' },
     short: { fr: 'Conseiller de vente', en: 'Sales associate' },
     kind: 'job',
     span: { start: '2023-07', end: '2023-09' },
@@ -267,24 +267,24 @@ export const experiences: Experience[] = [
     period: { fr: 'juil. — sept. 2023', en: 'Jul — Sep 2023' },
     type: { fr: 'Intérim via Adecco · 3 mois', en: 'Temp via Adecco · 3 months' },
     summary: {
-      fr: 'Mission d’intérim pour Adecco dans la boutique Lacoste du centre Beaugrenelle, en pleine saison d’été et de soldes : un environnement rythmé, exigeant et tourné vers le client.',
-      en: 'Temp assignment through Adecco at the Lacoste store in the Beaugrenelle centre, during the busy summer sales season: a fast-paced, demanding, customer-focused environment.',
+      fr: 'Mission d’intérim pour Adecco dans la boutique Lacoste du centre Beaugrenelle, en pleine saison des soldes : les outils informatiques du magasin au cœur du travail quotidien, au service du client.',
+      en: 'Temp assignment through Adecco at the Lacoste store in the Beaugrenelle centre, during the sales season: the store’s IT tools at the heart of daily work, in service of customers.',
     },
     bubbles: [
-      { icon: 'box', label: { fr: 'Gestion des stocks', en: 'Stock management' } },
       { icon: 'monitor', label: { fr: 'Outils de gestion du magasin', en: 'Store management tools' } },
+      { icon: 'database', label: { fr: 'Stocks informatisés', en: 'Digital stock tracking' } },
+      { icon: 'box', label: { fr: 'Inventaires', en: 'Inventories' } },
       { icon: 'heart', label: { fr: 'Relation client', en: 'Customer care' } },
       { icon: 'globe', label: { fr: 'Clientèle internationale', en: 'International customers' } },
-      { icon: 'users', label: { fr: 'Travail en équipe', en: 'Teamwork' } },
     ],
     points: [
       {
-        fr: 'Gestion des stocks en réserve et en boutique : réception des livraisons, contrôle des quantités, rangement et réassort selon les ventes de la journée.',
-        en: 'Stock management in the stockroom and on the floor: receiving deliveries, checking quantities, storage and replenishment based on daily sales.',
+        fr: 'Utilisation quotidienne des outils informatiques du magasin : consultation des stocks en temps réel, recherche d’un article, d’une taille ou d’une couleur pour un client.',
+        en: 'Daily use of the store’s IT tools: checking stock in real time, finding an item, size or colour for a customer.',
       },
       {
-        fr: 'Utilisation des outils informatiques du magasin pour suivre les stocks, participer aux inventaires et retrouver une taille ou une couleur pour un client.',
-        en: 'Using the store’s IT tools to track stock, take part in inventories and find a size or colour for a customer.',
+        fr: 'Suivi informatisé des stocks : enregistrement des livraisons, contrôle des quantités et participation aux inventaires.',
+        en: 'Digital stock tracking: recording deliveries, checking quantities and taking part in inventories.',
       },
       {
         fr: 'Accueil, écoute et conseil d’une clientèle internationale, en français et en anglais, jusqu’à la vente.',
@@ -300,11 +300,11 @@ export const experiences: Experience[] = [
         title: 'Lacoste',
         sub: { fr: 'Centre Beaugrenelle · Paris 15e', en: 'Beaugrenelle centre · Paris' },
         badge: { fr: 'Mission Adecco', en: 'Through Adecco' },
-        icons: ['box', 'tag', 'heart', 'users'],
+        icons: ['monitor', 'box', 'heart', 'users'],
       },
       caption: { fr: 'Boutique du centre Beaugrenelle, Paris 15e', en: 'Store in the Beaugrenelle centre, Paris' },
     },
-    tags: ['Gestion de stock', 'Relation client', 'Outils de gestion', 'Anglais', 'Retail'],
+    tags: ['Outils de gestion', 'Suivi des stocks', 'Inventaires', 'Relation client', 'Anglais'],
   },
   {
     role: { fr: 'Assistant informatique & bureautique', en: 'IT & Office Assistant' },
@@ -319,27 +319,27 @@ export const experiences: Experience[] = [
     period: { fr: 'juin — août 2022', en: 'Jun — Aug 2022' },
     type: { fr: 'Stage · 3 mois', en: 'Internship · 3 months' },
     summary: {
-      fr: 'Premier stage, dans un hôpital de district de Douala : j’y ai découvert le fonctionnement d’une organisation de santé et appris à maîtriser les outils bureautiques du quotidien.',
-      en: 'First internship, in a district hospital in Douala: I discovered how a healthcare organisation runs and mastered everyday office tools.',
+      fr: 'Premier stage en informatique, dans un hôpital de district de Douala : assistance aux utilisateurs et outils bureautiques au quotidien.',
+      en: 'First IT internship, in a district hospital in Douala: user support and everyday office tools.',
     },
     bubbles: [
-      { icon: 'monitor', label: { fr: 'Suite Microsoft Office', en: 'Microsoft Office' } },
+      { icon: 'users', label: { fr: 'Support utilisateurs', en: 'User support' } },
+      { icon: 'monitor', label: { fr: 'Postes de travail', en: 'Workstations' } },
       { icon: 'chart', label: { fr: 'Tableaux Excel', en: 'Excel spreadsheets' } },
-      { icon: 'file', label: { fr: 'Rédaction de rapports', en: 'Report writing' } },
-      { icon: 'users', label: { fr: 'Support aux équipes', en: 'Staff support' } },
+      { icon: 'file', label: { fr: 'Suite Microsoft Office', en: 'Microsoft Office' } },
     ],
     points: [
       {
-        fr: 'Prise en main de la suite Microsoft Office : documents sous Word, tableaux de suivi sous Excel, supports de présentation sous PowerPoint.',
-        en: 'Hands-on Microsoft Office: Word documents, Excel tracking sheets, PowerPoint presentations.',
+        fr: 'Assistance aux utilisateurs : prise en main des postes de travail et des logiciels du quotidien, aide à la résolution des problèmes courants.',
+        en: 'User support: helping staff with their workstations and everyday software, and with common issues.',
+      },
+      {
+        fr: 'Création de tableaux de suivi sous Excel et de documents sous Word et PowerPoint pour les services.',
+        en: 'Built Excel tracking sheets and Word and PowerPoint documents for the departments.',
       },
       {
         fr: 'Rédaction de rapports et de comptes rendus pour les services de l’hôpital.',
         en: 'Writing reports and minutes for hospital departments.',
-      },
-      {
-        fr: 'Assistance au personnel dans l’utilisation des postes et des logiciels du quotidien.',
-        en: 'Helping staff with their computers and everyday software.',
       },
     ],
     media: {
@@ -351,7 +351,7 @@ export const experiences: Experience[] = [
       },
       caption: { fr: 'Douala, Cameroun', en: 'Douala, Cameroon' },
     },
-    tags: ['Microsoft Office', 'Excel', 'Rédaction', 'Support utilisateurs'],
+    tags: ['Support utilisateurs', 'Postes de travail', 'Microsoft Office', 'Excel', 'Documentation'],
   },
 ];
 
@@ -579,8 +579,8 @@ export const softSkills: { icon: string; title: L; proof: L }[] = [
     icon: 'heart',
     title: { fr: 'Écoute et sens du client', en: 'Listening and customer focus' },
     proof: {
-      fr: 'Conseil d’une clientèle internationale chez Lacoste, visites régulières des magasins chez Bazar N’Guélé.',
-      en: 'Advising international customers at Lacoste, regular store visits at Bazar N’Guélé.',
+      fr: 'Conseil d’une clientèle internationale chez Lacoste, échanges avec les professionnels du secteur au SIAL Paris pour Bazar N’Guélé.',
+      en: 'Advising international customers at Lacoste, meeting industry professionals at SIAL Paris for Bazar N’Guélé.',
     },
   },
   {

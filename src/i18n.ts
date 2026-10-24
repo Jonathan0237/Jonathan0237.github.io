@@ -36,8 +36,8 @@ export const ui = {
       en: 'My personal and school projects, outside work-study: software and engineering. Not all of them are finished: I keep improving them and update this page at each new step.',
     },
     experienceIntro: {
-      fr: 'Trois ans d’alternance en industrie, puis une expérience terrain dans l’agroalimentaire. Mes missions d’alternance ont chacune une page de présentation.',
-      en: 'Three years of industrial work-study, then field experience in the food industry. Each work-study mission has its own overview page.',
+      fr: 'Trois ans d’alternance en industrie, puis une mission de conseil dans l’import-export. Mes missions d’alternance ont chacune une page de présentation.',
+      en: 'Three years of industrial work-study, then a consulting assignment in import-export. Each work-study mission has its own overview page.',
     },
     educationIntro: {
       fr: 'Une formation scientifique, puis l’énergie et le numérique, puis le management des systèmes d’information.',
