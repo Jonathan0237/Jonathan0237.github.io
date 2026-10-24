@@ -109,7 +109,6 @@ export const projects: Project[] = [
     role: { fr: 'Conception, développement full-stack, CI/CD', en: 'Design, full-stack development, CI/CD' },
     period: { fr: '2026 — aujourd’hui', en: '2026 — present' },
     stack: ['TypeScript', 'Next.js', 'React', 'NestJS', 'PostgreSQL', 'Docker', 'GitHub Actions'],
-    repo: 'https://github.com/Jonathan0237/JHouns',
     hue: 78,
     icon: 'ball',
     cover: jhAccueil,
@@ -353,7 +352,6 @@ export const projects: Project[] = [
     role: { fr: 'Conception et développement (back-end et application de bureau)', en: 'Design and development (back end and desktop app)' },
     period: { fr: 'nov. 2024 — aujourd’hui', en: 'Nov 2024 — present' },
     stack: ['Java', 'Spring Boot', 'JavaFX', 'IoT'],
-    repo: 'https://github.com/Jonathan0237/SSOCE_Frontend',
     hue: 150,
     icon: 'chip',
     screens: [
