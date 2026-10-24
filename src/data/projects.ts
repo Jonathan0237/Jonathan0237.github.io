@@ -503,7 +503,7 @@ export const missions: Project[] = [
       fr: 'Alfa Laval Packinox conçoit et fabrique de grands échangeurs thermiques à plaques soudées pour l’industrie, notamment la pétrochimie et la transition énergétique.',
       en: 'Alfa Laval Packinox designs and builds large welded-plate heat exchangers for industry, notably petrochemicals and the energy transition.',
     },
-    role: { fr: 'Apprenti ingénieur développement, 2 ans', en: 'Software engineering apprentice, 2 years' },
+    role: { fr: 'Ingénieur développement logiciel, 2 ans', en: 'Software development engineer, 2 years' },
     period: { fr: 'sept. 2023 — août 2025', en: 'Sep 2023 — Aug 2025' },
     stack: ['Java', 'JavaFX', 'Spring Boot', 'API REST', 'Git'],
     hue: 22,

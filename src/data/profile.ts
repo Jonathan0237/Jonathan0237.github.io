@@ -207,8 +207,8 @@ export const experiences: Experience[] = [
     tags: ['IEC 61850', 'Intégration système', 'Test système', 'Virtualisation', 'Python', 'GitLab'],
   },
   {
-    role: { fr: 'Apprenti ingénieur développement', en: 'Software Engineering Apprentice' },
-    short: { fr: 'Apprenti ingénieur développement', en: 'Software engineering apprentice' },
+    role: { fr: 'Ingénieur développement logiciel', en: 'Software Development Engineer' },
+    short: { fr: 'Ingénieur développement logiciel', en: 'Software development engineer' },
     kind: 'alternance',
     span: { start: '2023-09', end: '2025-08' },
     facets: ['dev'],
