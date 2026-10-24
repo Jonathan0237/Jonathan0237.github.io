@@ -2,20 +2,24 @@
 @import '@fontsource-variable/jetbrains-mono';
 
 :root {
-  --bg: #fafaf8;
+  --bg: #f3f4f1;
   --bg-elev: #ffffff;
-  --bg-soft: #f1f2ee;
+  --bg-soft: #eaece7;
   --text: #11161c;
-  --text-muted: #56606b;
-  --border: #e3e5e0;
+  --text-muted: #4c5661;
+  --border: #d3d7d0;
+  --border-strong: #b9bfb6;
   --accent: #0d7a6c;
   --accent-strong: #08594f;
-  --accent-soft: rgba(13, 122, 108, 0.1);
+  --accent-soft: rgba(13, 122, 108, 0.12);
+  --bar-formation: #7c86f0;
   --accent-2: #6d28d9;
   --accent-3: #d97706;
   --gradient: linear-gradient(110deg, #0d9488 0%, #4f46e5 55%, #9333ea 100%);
   --on-accent: #ffffff;
-  --shadow: 0 1px 2px rgba(17, 22, 28, 0.04), 0 8px 24px rgba(17, 22, 28, 0.06);
+  --shadow: 0 1px 2px rgba(17, 22, 28, 0.06), 0 10px 28px rgba(17, 22, 28, 0.08);
+  /* En clair, une ombre légère détache les cartes du fond. */
+  --card-shadow: 0 1px 2px rgba(17, 22, 28, 0.05), 0 4px 14px rgba(17, 22, 28, 0.05);
   --radius: 14px;
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -30,6 +34,8 @@
   --text: #e8edf2;
   --text-muted: #94a0ac;
   --border: #1f2833;
+  --border-strong: #2c3845;
+  --bar-formation: #a5b4fc;
   --accent: #5eead4;
   --accent-strong: #99f6e4;
   --accent-soft: rgba(94, 234, 212, 0.1);
@@ -38,6 +44,7 @@
   --gradient: linear-gradient(110deg, #5eead4 0%, #818cf8 50%, #c084fc 100%);
   --on-accent: #04201c;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.35);
+  --card-shadow: none;
   color-scheme: dark;
 }
 
@@ -215,6 +222,7 @@ p {
   background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
