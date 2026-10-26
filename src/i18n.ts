@@ -23,7 +23,7 @@ export const ui = {
   hero: {
     hello: { fr: 'Bonjour, je suis', en: "Hi, I'm" },
     seeProjects: { fr: 'Voir mes projets', en: 'See my projects' },
-    downloadCv: { fr: 'Télécharger mon CV', en: 'Download my resume' },
+    contact: { fr: 'Me contacter', en: 'Contact me' },
   },
   sections: {
     about: { fr: 'À propos', en: 'About me' },

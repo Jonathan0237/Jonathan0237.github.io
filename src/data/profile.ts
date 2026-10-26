@@ -39,7 +39,6 @@ export const profile = {
   phoneHref: 'tel:+33616508814',
   linkedin: 'https://www.linkedin.com/in/jonathan-simo-511322264',
   github: 'https://github.com/Jonathan0237',
-  cv: '/cv/Jonathan_Simo_Kuate_CV.pdf',
   about: [
     {
       fr: "Ingénieur diplômé de l'ECAM-EPMI (titre CTI) et du Mastère Spécialisé Conseil et Management en Système d'Information de l'IMT Business School, j'ai passé trois ans en alternance dans deux grands groupes industriels.",
