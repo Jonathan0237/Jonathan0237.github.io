@@ -642,6 +642,7 @@ export const certifications: Cert[] = [
     name: { fr: 'Docker pour DevOps', en: 'Docker for DevOps' },
     issuer: 'Udemy',
     date: { fr: '2025', en: '2025' },
+    url: 'https://www.udemy.com/certificate/UC-8fb379c3-4e2c-4840-9ef3-d1d030b11359/',
   },
   {
     name: { fr: 'Python : la formation complète', en: 'Python: the complete course' },
